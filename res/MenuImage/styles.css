@@ -1,0 +1,5 @@
+.slider .thumb {
+    -fx-background-image: url('file:/D:/black_meets_wukong/game/res/MenuImage/slide.png');
+    -fx-background-size: cover; /* Ensures the image covers the thumb */
+    -fx-background-repeat: no-repeat;
+}
