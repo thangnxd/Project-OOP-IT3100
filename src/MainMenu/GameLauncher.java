@@ -1,5 +1,6 @@
 package MainMenu;
 
+import Chapter1.Chapter1;
 import javafx.application.Application;
 import javafx.application.Platform;
 import javafx.scene.Scene;
@@ -20,22 +21,33 @@ import java.nio.file.Paths;
 public class GameLauncher extends Application {
     // Stage chung cho toàn bộ chương trình
     private Stage primaryStage;
-    private MediaPlayer backgroundMusicPlayer;
+    private MediaPlayer musicPlayer;
+
+    @Override
+    public void start(Stage primaryStage) {
+        this.primaryStage = primaryStage;
+        initializeBackgroundMusic();
+        showIntro(); // Hiển thị phần intro khi bắt đầu
+    }
+
+    public MediaPlayer getMusicPlayer(){
+        return musicPlayer;
+    }
 
     // cai dat nhac nen
     private void initializeBackgroundMusic(){
         String musicPath = "D:/black_meets_wukong/game/res/Sound/background_music.mp3";
         Media backgroundMusic = new Media(Paths.get(musicPath).toUri().toString());
-        backgroundMusicPlayer = new MediaPlayer(backgroundMusic);
-        backgroundMusicPlayer.setCycleCount(MediaPlayer.INDEFINITE);
-        backgroundMusicPlayer.setVolume(0.5);
-        backgroundMusicPlayer.play();
+        musicPlayer = new MediaPlayer(backgroundMusic);
+        musicPlayer.setCycleCount(MediaPlayer.INDEFINITE);
+        musicPlayer.setVolume(0.5);
+        musicPlayer.play();
     }
 
     // Hiển thị màn hình menu chính
     public void showMainMenu() {
-        if (backgroundMusicPlayer != null && backgroundMusicPlayer.getStatus() != MediaPlayer.Status.PLAYING) {
-            backgroundMusicPlayer.play(); // Ensure music is playing when showing the main menu
+        if (musicPlayer != null && musicPlayer.getStatus() != MediaPlayer.Status.PLAYING) {
+            musicPlayer.play(); // Ensure music is playing when showing the main menu
         }
 
         // Tạo Media và MediaPlayer cho video background
@@ -61,8 +73,8 @@ public class GameLauncher extends Application {
         AnchorPane.setTopAnchor(startButton, 625.0);
 
         // Chuyển sang Chapter menu khi nhấn vào start button
-        ChapterMenu chapterMenu = new ChapterMenu(this);
         startButton.setOnAction(e -> {
+            ChapterMenu chapterMenu = new ChapterMenu(this);
             chapterMenu.showChapterMenu(primaryStage);
         });
 
@@ -79,7 +91,7 @@ public class GameLauncher extends Application {
         //settingButtonView.setTranslateY(-5);
 
         // Chuyển sang setting menu khi nhấn vào setting button
-        SettingMenu settingMenu = new SettingMenu(this, backgroundMusicPlayer);
+        SettingMenu settingMenu = new SettingMenu(this, musicPlayer);
         settingButton.setOnAction(e -> {
             settingMenu.showSettingMenu(primaryStage);
         });
@@ -124,12 +136,7 @@ public class GameLauncher extends Application {
         primaryStage.show();
     }
 
-    @Override
-    public void start(Stage primaryStage) {
-        this.primaryStage = primaryStage;
-        initializeBackgroundMusic();
-        showIntro(); // Hiển thị phần intro khi bắt đầu
-    }
+
 
     // Hiển thị video intro
     private void showIntro() {

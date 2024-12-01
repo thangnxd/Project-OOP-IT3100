@@ -45,8 +45,6 @@ public class TutorialMenu {
 
         // Tạo giao diện chọn setting
         AnchorPane tutorialPane = new AnchorPane(backButton);
-
-
         StackPane root = new StackPane(backgroundView, menuView, tutorialPane);
         Scene tutorialScene = new Scene(root, 1380, 800);
         stage.setScene(tutorialScene);

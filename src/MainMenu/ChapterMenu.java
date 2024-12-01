@@ -1,5 +1,8 @@
 package MainMenu;
 
+import Chapter1.Chapter1;
+import Chapter2.Chapter2;
+import Chapter3.Chapter3;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.image.Image;
@@ -11,7 +14,8 @@ import javafx.stage.Stage;
 import java.nio.file.Paths;
 
 public class ChapterMenu {
-    private GameLauncher gameLauncher;
+    private final GameLauncher gameLauncher;
+    private ChapterMenu chapterMenu;
 
     public ChapterMenu(GameLauncher gameLauncher){
         this.gameLauncher = gameLauncher;
@@ -58,9 +62,27 @@ public class ChapterMenu {
         AnchorPane.setTopAnchor(chapter3Button, 475.0);
 
         // Sự kiện nút chọn chapter
-        chapter1Button.setOnAction(e -> System.out.println("Chapter 1 Selected"));
-        chapter2Button.setOnAction(e -> System.out.println("Chapter 2 Selected"));
-        chapter3Button.setOnAction(e -> System.out.println("Chapter 3 Selected"));
+        chapter1Button.setOnAction(e -> {
+            if (gameLauncher.getMusicPlayer() != null){
+                gameLauncher.getMusicPlayer().stop();
+            }
+            Chapter1 chapter1 = new Chapter1(gameLauncher, this);
+            chapter1.showChapter1(stage);
+        });
+        chapter2Button.setOnAction(e -> {
+            if (gameLauncher.getMusicPlayer() != null){
+                gameLauncher.getMusicPlayer().stop();
+            }
+            Chapter2 chapter2 = new Chapter2(gameLauncher, this);
+            chapter2.showChapter2(stage);
+        });
+        chapter3Button.setOnAction(e -> {
+            if (gameLauncher.getMusicPlayer() != null){
+                gameLauncher.getMusicPlayer().stop();
+            }
+            Chapter3 chapter3 = new Chapter3(gameLauncher, this);
+            chapter3.showChapter3(stage);
+        });
 
         // Tạo nút back về menu chính
         String backButtonPath = "D:/black_meets_wukong/game/res/MenuImage/back_button.png";
