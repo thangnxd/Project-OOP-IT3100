@@ -1,44 +1,46 @@
 package Chapter1;
 
+import Entity.AzureP2;
 import MainMenu.ChapterMenu;
 import MainMenu.GameLauncher;
-import javafx.animation.PauseTransition;
+
+import Entity.Player1C1;
+
 import javafx.scene.Scene;
 import javafx.scene.control.Slider;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.StackPane;
-import javafx.scene.media.Media;
 import javafx.scene.media.MediaPlayer;
 import javafx.stage.Stage;
-import javafx.scene.control.Label;
 import javafx.scene.control.Button;
-import javafx.scene.input.KeyCode;
+
 import java.nio.file.Paths;
-import javafx.scene.text.Font;
-import javafx.scene.text.TextAlignment;
-import javafx.util.Duration;
 
 public class PauseMenu{
     private final GameLauncher gameLauncher;
     private Chapter1 chapter1;
     private MediaPlayer mediaPlayer;
+    private Player1C1 player11;
+    private AzureP2 player12;
 
-    public PauseMenu(Chapter1 chapter1, MediaPlayer mediaPlayer, GameLauncher gameLauncher){
+    public PauseMenu(Chapter1 chapter1, MediaPlayer mediaPlayer, GameLauncher gameLauncher, Player1C1 player11, AzureP2 player12){
         this.chapter1 = chapter1;
         this.mediaPlayer = mediaPlayer;
         this.gameLauncher = gameLauncher;
+        this.player11 = player11;
+        this.player12 = player12;
     }
 
     public void showPauseMenu(Stage stage){
         // tao pause menu
-        String imagePath = "D:/black_meets_wukong/game/res/ChapterImage/pause_screen.png";
+        String imagePath = "D:/BMW/Project_OOP_IT3100/res/ChapterImage/pause_screen.png";
         Image background = new Image(Paths.get(imagePath).toUri().toString());
         ImageView backgroundView = new ImageView(background);
 
         // tao nut quay tro ve chapter menu
-        String exitButtonPath = "D:/black_meets_wukong/game/res/ChapterImage/exit_button.png";
+        String exitButtonPath = "D:/BMW/Project_OOP_IT3100/res/ChapterImage/exit_button.png";
         Image exitButtonImage = new Image(Paths.get(exitButtonPath).toUri().toString());
         ImageView exitButtonView = new ImageView(exitButtonImage);
         Button exitButton = new Button();
@@ -56,7 +58,7 @@ public class PauseMenu{
         });
 
         // tao nut de tiep tuc game
-        String resumeButtonPath = "D:/black_meets_wukong/game/res/ChapterImage/resume_button.png";
+        String resumeButtonPath = "D:/BMW/Project_OOP_IT3100/res/ChapterImage/resume_button.png";
         Image resumeButtonImage = new Image(Paths.get(resumeButtonPath).toUri().toString());
         ImageView resumeButtonView = new ImageView(resumeButtonImage);
         Button resumeButton = new Button();
@@ -71,8 +73,8 @@ public class PauseMenu{
         });
 
         // tao icon volume va mute
-        String volumeImagePath = "D:/black_meets_wukong/game/res/ChapterImage/volume.png";
-        String muteImagePath = "D:/black_meets_wukong/game/res/ChapterImage/mute.png";
+        String volumeImagePath = "D:/BMW/Project_OOP_IT3100/res/ChapterImage/volume.png";
+        String muteImagePath = "D:/BMW/Project_OOP_IT3100/res/ChapterImage/mute.png";
         Image volumeIconImage = new Image(Paths.get(volumeImagePath).toUri().toString());
         Image muteIconImage = new Image(Paths.get(muteImagePath).toUri().toString());
 
@@ -90,7 +92,8 @@ public class PauseMenu{
         volumeSlider.setPrefWidth(200);
 
         // ap dung css vao nut dieu chinh am luong
-        volumeSlider.getStylesheets().add("file:/D:/black_meets_wukong/game/res/ChapterImage/styles.css");
+        volumeSlider.getStylesheets().add("file:/D:/BMW/Project_OOP_IT3100/res/ChapterImage/styles.css");
+
 
         // vi tri cua slider
         AnchorPane.setLeftAnchor(volumeSlider, 590.0);
